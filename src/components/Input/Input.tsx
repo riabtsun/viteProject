@@ -4,11 +4,12 @@ interface InputProps {
   placeHolder: string;
   ariaLabel: string;
 }
+
 const Input = ({ placeHolder, ariaLabel }: InputProps) => {
   return (
     <input
       className={classes.input}
-      type="text"
+      type='text'
       placeholder={placeHolder}
       aria-label={ariaLabel}
     />

@@ -5,6 +5,7 @@ interface TypographyProps {
   className: string;
   children?: string | undefined;
 }
+
 const Typography = ({ tag, className, children }: TypographyProps) => {
   return createElement(tag, { className: className }, children);
 };
