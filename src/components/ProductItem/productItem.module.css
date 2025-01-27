@@ -1,0 +1,81 @@
+.menu-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.pizzaInfo {
+    text-align: left;
+}
+.pizzaItem {
+    display: grid;
+    grid-template-columns: 100px 1fr auto;
+    gap: 1rem;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.pizzaImage {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.pizzaName {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.ingredients {
+    color: #666;
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.soldOut {
+    color: #999;
+    font-weight: bold;
+}
+
+.addToCart {
+    background-color: #FDB913;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: .3s background-color;
+}
+
+.addToCart:hover {
+    background-color: #e5a700;
+}
+
+.counter {
+    display: none;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.counterButton {
+    background-color: #FDB913;
+    color: white;
+    border: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.counter span {
+    font-weight: bold;
+}

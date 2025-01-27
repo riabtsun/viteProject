@@ -5,7 +5,6 @@ const Header = () => {
   const location = useLocation();
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>PIZZA DAY</div>
       {location.pathname !== '/' && (
         <input
           type='text'
@@ -13,6 +12,7 @@ const Header = () => {
           placeholder='Search for the order #'
         />
       )}
+      <div className={classes.logo}>PIZZA DAY</div>
       <ul className={classes.navList}>
         <li>
           <NavLink className={classes.navLink} to={'/'}>

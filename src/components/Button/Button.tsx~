@@ -6,7 +6,7 @@ interface ButtonProps {
 }
 
 const Button = ({ text }: ButtonProps) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const buttonRef = useRef(null);
 
   function getRandomColor(): void {
     const letters: string = '0123456789ABCDEF';
