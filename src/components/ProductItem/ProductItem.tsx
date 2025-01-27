@@ -17,7 +17,7 @@ const ProductItem = ({
   ingredients,
   soldOut,
 }: ProductDataProps) => {
-  let [count, setCount] = useState(1);
+  const [count, setCount] = useState(1);
   const addToCardRef = useRef<HTMLButtonElement>(null);
   const counterRef = useRef<HTMLDivElement>(null);
   const hideBtn = (): void => {
@@ -27,9 +27,9 @@ const ProductItem = ({
     }
   };
 
-  const decrementCount = () => {
+  const decrementCount = (): void => {
     if (count > 1) {
-      setCount(--count);
+      setCount(count - 1);
     } else {
       if (counterRef.current && addToCardRef.current) {
         counterRef.current.style.display = 'none';
@@ -38,8 +38,8 @@ const ProductItem = ({
     }
   };
 
-  const incrementCount = () => {
-    setCount(++count);
+  const incrementCount = (): void => {
+    setCount(count + 1);
   };
   return (
     <div className={classes.pizzaItem}>
