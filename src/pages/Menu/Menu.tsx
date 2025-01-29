@@ -1,7 +1,6 @@
-import classes from './menu.module.css';
+import '../../App.css';
 import ProductItem from '../../components/ProductItem/ProductItem.tsx';
-import pizzas from '../../data.ts';
-import ClassProductItem from '../../components/ProductItem/ClassProductItem.tsx';
+import pizzas from '../../menuData.ts';
 
 interface ProductData {
   id: number;
@@ -14,10 +13,10 @@ interface ProductData {
 
 const Menu = () => {
   return (
-    <div className={classes.menuContainer}>
+    <div className='container'>
       {pizzas.length ? (
         pizzas.map((pizza: ProductData) => (
-          <ClassProductItem key={pizza.id} {...pizza} />
+          <ProductItem key={pizza.id} {...pizza} />
         ))
       ) : (
         <p>No pizzas found</p>

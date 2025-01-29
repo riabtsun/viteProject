@@ -1,29 +1,22 @@
-import classes from './button.module.css';
-import { useRef } from 'react';
+// import { useRef } from 'react';
 
-interface ButtonProps {
+import * as React from 'react';
+import { forwardRef } from 'react';
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
+  className: string;
+  onClick?: () => void;
 }
 
-const Button = ({ text }: ButtonProps) => {
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
-  function getRandomColor(): void {
-    const letters: string = '0123456789ABCDEF';
-    let color: string = '#';
-    for (let i: number = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    if (buttonRef.current) {
-      buttonRef.current.style.backgroundColor = color;
-    }
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ onClick, className, text }: ButtonProps, ref) => {
+    return (
+      <button ref={ref} onClick={onClick} className={className}>
+        {text}
+      </button>
+    );
   }
-
-  return (
-    <button ref={buttonRef} onClick={getRandomColor} className={classes.btn}>
-      {text}
-    </button>
-  );
-};
+);
 
 export default Button;

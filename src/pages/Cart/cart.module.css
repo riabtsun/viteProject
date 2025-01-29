@@ -1,0 +1,39 @@
+.cartActions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.orderBtn {
+    background-color: #FDB913;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.clearBtn {
+    background-color: transparent;
+    color: #666;
+    border: 1px solid #ccc;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.cartTitle {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.backLink {
+    color: #4A90E2;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 2rem;
+}

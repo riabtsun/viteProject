@@ -1,5 +1,6 @@
 import classes from './productItem.module.css';
 import { useRef, useState } from 'react';
+import Button from '../Button/Button.tsx';
 
 interface ProductDataProps {
   id?: number;
@@ -63,13 +64,12 @@ const ProductItem = ({
       </div>
       {!soldOut && (
         <div className='cart-controls'>
-          <button
+          <Button
             ref={addToCardRef}
             onClick={hideBtn}
             className={classes.addToCart}
-          >
-            ADD TO CART
-          </button>
+            text='ADD TO CART'
+          ></Button>
           <div ref={counterRef} className={classes.counter}>
             <button
               onClick={decrementCount}
