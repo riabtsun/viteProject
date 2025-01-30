@@ -1,7 +1,6 @@
 import classes from './productItem.module.css';
 import { useRef, useState } from 'react';
 import Button from '../Button/Button.tsx';
-import { incrementCount, decrementCount } from '../../helpers';
 
 interface ProductDataProps {
   id?: number;
@@ -13,12 +12,12 @@ interface ProductDataProps {
 }
 
 const ProductItem = ({
-                       name,
-                       unitPrice,
-                       imageUrl,
-                       ingredients,
-                       soldOut,
-                     }: ProductDataProps) => {
+  name,
+  unitPrice,
+  imageUrl,
+  ingredients,
+  soldOut,
+}: ProductDataProps) => {
   const [count, setCount] = useState(1);
   const addToCardRef = useRef<HTMLButtonElement>(null);
   const counterRef = useRef<HTMLDivElement>(null);
@@ -28,7 +27,19 @@ const ProductItem = ({
       counterRef.current.style.display = 'flex';
     }
   };
-
+  const decrementCount = (): void => {
+    if (count > 1) {
+      setCount(count - 1);
+    } else {
+      if (counterRef.current && addToCardRef.current) {
+        counterRef.current.style.display = 'none';
+        addToCardRef.current.style.display = 'block';
+      }
+    }
+  };
+  const incrementCount = (): void => {
+    setCount(count + 1);
+  };
   return (
     <div className={classes.pizzaItem}>
       <img className={classes.pizzaImage} src={imageUrl} alt={name} />
@@ -40,7 +51,7 @@ const ProductItem = ({
               <span key={ingredient}>{ingredient}, </span>
             ) : (
               <span key={ingredient}>{ingredient} </span>
-            ),
+            )
           )}
         </p>
         {soldOut ? (
@@ -56,23 +67,22 @@ const ProductItem = ({
             onClick={hideBtn}
             className={classes.addToCart}
             text='ADD TO CART'
-          ></Button>
+          />
           <div ref={counterRef} className={classes.counter}>
-            <button
-              onClick={() => decrementCount(count, setCount, counterRef, addToCardRef)}
+            <Button
+              onClick={decrementCount}
               className={classes.counterButton}
               aria-label='Decrease quantity'
-            >
-              -
-            </button>
+              text='-'
+            />
+
             <span>{count}</span>
-            <button
-              onClick={() => incrementCount(count, setCount)}
+            <Button
+              onClick={incrementCount}
               className={classes.counterButton}
               aria-label='Increase quantity'
-            >
-              +
-            </button>
+              text='+'
+            />
           </div>
         </div>
       )}

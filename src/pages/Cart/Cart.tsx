@@ -3,8 +3,14 @@ import '../../App.css';
 import CartItem from '../../components/CartItem/CartItem.tsx';
 import cartItems from '../../cartData.ts';
 import { CartProps } from '../../types.ts';
+import { useState } from 'react';
+import Button from '../../components/Button/Button.tsx';
 
 const Cart = () => {
+  const [productItems, setProductItems] = useState([...cartItems]);
+  const clearCart = () => {
+    setProductItems([]);
+  };
   return (
     <div className='container'>
       <a href='#' className={classes.backLink}>
@@ -13,8 +19,8 @@ const Cart = () => {
       <h1 className={classes.cartTitle}>Your cart, vlad</h1>
 
       <div className='cart-items'>
-        {cartItems.length ? (
-          cartItems.map((product: CartProps) => {
+        {productItems.length ? (
+          productItems.map((product: CartProps) => {
             return (
               <CartItem
                 key={product.id}
@@ -29,8 +35,12 @@ const Cart = () => {
         )}
       </div>
       <div className={classes.cartActions}>
-        <button className={classes.orderBtn}>Order pizzas</button>
-        <button className={classes.clearBtn}>Clear cart</button>
+        <Button className={classes.orderBtn} text='Order pizzas' />
+        <Button
+          onClick={clearCart}
+          className={classes.clearBtn}
+          text='Clear cart'
+        />
       </div>
     </div>
   );
