@@ -10,7 +10,7 @@ interface InputProps {
 const Input = ({ type, placeHolder, ariaLabel, className }: InputProps) => {
   const [inputState, setInputState] = useState('');
   const handleInput = (e: ChangeEvent<HTMLInputElement>): void => {
-    setInputState(inputState);
+    setInputState(e.target.value);
     console.log(e.target.value);
   };
   return (
