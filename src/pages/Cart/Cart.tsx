@@ -1,10 +1,10 @@
 import classes from './cart.module.css';
 import '../../App.css';
 import CartItem from '../../components/CartItem/CartItem.tsx';
+import Button from '../../components/Button/Button.tsx';
 import cartItems from '../../cartData.ts';
 import { CartProps } from '../../types.ts';
 import { useState } from 'react';
-import Button from '../../components/Button/Button.tsx';
 
 const Cart = () => {
   const [productItems, setProductItems] = useState([...cartItems]);

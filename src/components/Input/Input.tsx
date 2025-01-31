@@ -14,14 +14,16 @@ const Input = ({ type, placeHolder, ariaLabel, className }: InputProps) => {
     console.log(e.target.value);
   };
   return (
-    <input
-      className={className}
-      type={type}
-      placeholder={placeHolder}
-      aria-label={ariaLabel}
-      onChange={handleInput}
-      value={inputState}
-    />
+    <form>
+      <input
+        className={className}
+        type={type}
+        placeholder={placeHolder}
+        aria-label={ariaLabel}
+        onChange={handleInput}
+        value={inputState}
+      />
+    </form>
   );
 };
 

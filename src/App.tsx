@@ -5,6 +5,7 @@ import MainPaige from './pages/MainPage/MainPaige.tsx';
 import Menu from './pages/Menu/Menu.tsx';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Cart from './pages/Cart/Cart.tsx';
+import HW40 from './pages/HW40/HW40.tsx';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path='/' element={<MainPaige />} />
             <Route path='/menu' element={<Menu />} />
             <Route path='/cart' element={<Cart />} />
+            <Route path='hw40' element={<HW40 />} />
           </Routes>
         </main>
       </div>
