@@ -42,7 +42,7 @@ const GetData = () => {
 
   return (
     <div className={classes.cardWrap}>
-      <img src={data?.image} alt='' />
+      <img src={data?.image} alt={data?.name} />
       <h1 className={classes.name}>{data?.name}</h1>
       <div className={classes.personInfo}>
         <p>status: {data?.status}</p>
