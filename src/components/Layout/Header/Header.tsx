@@ -31,6 +31,11 @@ const Header = () => {
             Cart
           </NavLink>
         </li>
+        <li>
+          <NavLink className={classes.navLink} to={'/hw40'}>
+            HW 40
+          </NavLink>
+        </li>
       </ul>
     </header>
   );
