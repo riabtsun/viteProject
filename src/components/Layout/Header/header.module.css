@@ -14,6 +14,10 @@
     transition: color .3s;
 }
 
+.navLink.active {
+    color : #fff;
+}
+
 .navList {
     display: flex;
     column-gap: 20px;

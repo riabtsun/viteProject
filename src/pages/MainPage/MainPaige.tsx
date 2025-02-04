@@ -1,9 +1,7 @@
 import classes from '../../components/Input/input.module.css';
-import btnClasses from '../../components/Button/button.module.css';
 import typographyClasses from '../../components/Typography/typography.module.css';
 import Typography from '../../components/Typography/Typography.tsx';
 import Input from '../../components/Input/Input.tsx';
-import Button from '../../components/Button/Button.tsx';
 
 const MainPaige = () => {
   return (
@@ -20,10 +18,11 @@ const MainPaige = () => {
       <Input
         placeHolder='Your full name'
         ariaLabel='Your full name'
-        type={'text'}
+        type='text'
         className={classes.input}
+        withBtn={true}
+        navigateTo='/menu'
       />
-      <Button text='Start Order' className={btnClasses.orderBtn} />
     </>
   );
 };

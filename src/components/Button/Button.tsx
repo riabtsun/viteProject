@@ -7,12 +7,13 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   className: string;
   onClick?: () => void;
+  type: 'button' | 'reset' | 'submit';
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ onClick, className, text }: ButtonProps, ref) => {
+  ({ onClick, className, text, type }: ButtonProps, ref) => {
     return (
-      <button ref={ref} onClick={onClick} className={className}>
+      <button type={type} ref={ref} onClick={onClick} className={className}>
         {text}
       </button>
     );

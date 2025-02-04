@@ -1,12 +1,14 @@
 import classes from './header.module.css';
-import { NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import Input from '../../Input/Input.tsx';
 
 const Header = () => {
   const location = useLocation();
   return (
     <header className={classes.header}>
-      <div className={classes.logo}>PIZZA DAY</div>
+      <Link to={'/'}>
+        <p className={classes.logo}>PIZZA DAY</p>
+      </Link>
       {location.pathname !== '/' && (
         <Input
           type='text'
@@ -17,23 +19,25 @@ const Header = () => {
       )}
       <ul className={classes.navList}>
         <li>
-          <NavLink className={classes.navLink} to={'/'}>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className={classes.navLink} to={'/menu'}>
-            Menu
+          <NavLink to={'/menu'}>
+            {({ isActive }) => (
+              <span
+                className={`${classes.navLink} ${isActive && classes.active}`}
+              >
+                Menu
+              </span>
+            )}
           </NavLink>
         </li>
         <li>
           <NavLink className={classes.navLink} to={'/cart'}>
-            Cart
-          </NavLink>
-        </li>
-        <li>
-          <NavLink className={classes.navLink} to={'/hw40'}>
-            HW 40
+            {({ isActive }) => (
+              <span
+                className={`${classes.navLink} ${isActive && classes.active}`}
+              >
+                Cart
+              </span>
+            )}
           </NavLink>
         </li>
       </ul>

@@ -5,6 +5,7 @@ import Button from '../../components/Button/Button.tsx';
 import cartItems from '../../cartData.ts';
 import { CartProps } from '../../types.ts';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const [productItems, setProductItems] = useState([...cartItems]);
@@ -13,9 +14,9 @@ const Cart = () => {
   };
   return (
     <div className='container'>
-      <a href='#' className={classes.backLink}>
+      <Link to='/menu' className={classes.backLink}>
         ← Back to menu
-      </a>
+      </Link>
       <h1 className={classes.cartTitle}>Your cart, vlad</h1>
 
       <div className='cart-items'>
@@ -35,8 +36,13 @@ const Cart = () => {
         )}
       </div>
       <div className={classes.cartActions}>
-        <Button className={classes.orderBtn} text='Order pizzas' />
         <Button
+          type='button'
+          className={classes.orderBtn}
+          text='Order pizzas'
+        />
+        <Button
+          type='button'
           onClick={clearCart}
           className={classes.clearBtn}
           text='Clear cart'
