@@ -14,6 +14,7 @@ interface ProductData {
 
 const Menu = () => {
   const [data, setData] = useState<ProductData[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,10 +28,16 @@ const Menu = () => {
         setData(response.data.data);
       } catch (e) {
         console.log(e);
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
+
+  if (loading) {
+    return <h1>Завантаження даних...</h1>;
+  }
 
   return (
     <div className='container'>
@@ -39,7 +46,7 @@ const Menu = () => {
           <ProductItem key={pizza.id} {...pizza} />
         ))
       ) : (
-        <p>No pizzas found</p>
+        <p>All pizzas was eaten 😥</p>
       )}
     </div>
   );
