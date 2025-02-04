@@ -67,6 +67,7 @@ const ProductItem = ({
             onClick={hideBtn}
             className={classes.addToCart}
             text='ADD TO CART'
+            type='button'
           />
           <div ref={counterRef} className={classes.counter}>
             <Button
@@ -74,6 +75,7 @@ const ProductItem = ({
               className={classes.counterButton}
               aria-label='Decrease quantity'
               text='-'
+              type='button'
             />
 
             <span>{count}</span>
@@ -82,6 +84,7 @@ const ProductItem = ({
               className={classes.counterButton}
               aria-label='Increase quantity'
               text='+'
+              type='button'
             />
           </div>
         </div>

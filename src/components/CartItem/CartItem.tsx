@@ -33,13 +33,24 @@ const CartItem = ({ name, price, quantity }: CartProps) => {
       <span>{name}</span>
       <span className={classes.price}>€{itemPrice}</span>
       <div className={classes.quantityControls}>
-        <Button onClick={removeItem} className={classes.quantityBtn} text='-' />
+        <Button
+          onClick={removeItem}
+          className={classes.quantityBtn}
+          text='-'
+          type='button'
+        />
         <span>{count}</span>
-        <Button onClick={addItem} className={classes.quantityBtn} text='+' />
+        <Button
+          onClick={addItem}
+          className={classes.quantityBtn}
+          text='+'
+          type='button'
+        />
         <Button
           onClick={deleteItem}
           className={classes.deleteBtn}
           text='DELETE'
+          type='button'
         />
       </div>
     </div>

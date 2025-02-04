@@ -15,6 +15,7 @@ const Header = () => {
           className={classes.searchBar}
           placeHolder='Search for the order #'
           ariaLabel='search-input'
+          withBtn={false}
         />
       )}
       <ul className={classes.navList}>
