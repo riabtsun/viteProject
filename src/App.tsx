@@ -1,9 +1,9 @@
 import './App.css';
 import './components/Typography/typography.module.css';
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/Layout/Header/Header';
 import MainPaige from './pages/MainPage/MainPaige.tsx';
 import Menu from './pages/Menu/Menu.tsx';
-import { Routes, Route } from 'react-router-dom';
 import Cart from './pages/Cart/Cart.tsx';
 import PageNotFound from './pages/PageNotFound/PageNotFound.tsx';
 

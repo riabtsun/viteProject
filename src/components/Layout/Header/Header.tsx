@@ -1,6 +1,6 @@
 import classes from './header.module.css';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import Input from '../../Input/Input.tsx';
+import SearchInput from '../../SearchInput/SearchInput.tsx';
 
 const Header = () => {
   const location = useLocation();
@@ -10,12 +10,11 @@ const Header = () => {
         <p className={classes.logo}>PIZZA DAY</p>
       </Link>
       {location.pathname !== '/' && (
-        <Input
-          type='text'
+        <SearchInput
+          type='search'
           className={classes.searchBar}
           placeHolder='Search for the order #'
           ariaLabel='search-input'
-          withBtn={false}
         />
       )}
       <ul className={classes.navList}>

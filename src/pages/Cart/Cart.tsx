@@ -4,20 +4,23 @@ import CartItem from '../../components/CartItem/CartItem.tsx';
 import Button from '../../components/Button/Button.tsx';
 import cartItems from '../../cartData.ts';
 import { CartProps } from '../../types.ts';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { UserContextProvider } from '../../contexts/UserContext.tsx';
 
 const Cart = () => {
   const [productItems, setProductItems] = useState([...cartItems]);
   const clearCart = () => {
     setProductItems([]);
   };
+
+  const data = useContext(UserContextProvider);
   return (
     <div className='container'>
       <Link to='/menu' className={classes.backLink}>
         ← Back to menu
       </Link>
-      <h1 className={classes.cartTitle}>Your cart, vlad</h1>
+      <h1 className={classes.cartTitle}>Your cart, {data?.name}</h1>
 
       <div className='cart-items'>
         {productItems.length ? (

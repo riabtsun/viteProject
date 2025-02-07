@@ -1,7 +1,7 @@
 import classes from '../../components/Input/input.module.css';
 import typographyClasses from '../../components/Typography/typography.module.css';
 import Typography from '../../components/Typography/Typography.tsx';
-import Input from '../../components/Input/Input.tsx';
+import InputForm from '../../components/Input/InputForm.tsx';
 
 const MainPaige = () => {
   return (
@@ -15,7 +15,7 @@ const MainPaige = () => {
       <Typography tag='p' className={typographyClasses.welcome}>
         👉 Welcome! Please start by telling us your name
       </Typography>
-      <Input
+      <InputForm
         placeHolder='Your full name'
         ariaLabel='Your full name'
         type='text'
