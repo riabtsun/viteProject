@@ -3,13 +3,14 @@ import ProductItem from '../../components/ProductItem/ProductItem.tsx';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-interface ProductData {
+export interface ProductData {
   id: number;
   name: string;
   unitPrice: number;
   imageUrl: string;
   ingredients: string[];
   soldOut: boolean;
+  qty: number;
 }
 
 const Menu = () => {

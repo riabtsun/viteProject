@@ -3,11 +3,13 @@
 import * as React from 'react';
 import { forwardRef } from 'react';
 
+type ButtonTypes = 'button' | 'reset' | 'submit';
+
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text: string;
   className: string;
   onClick?: () => void;
-  type: 'button' | 'reset' | 'submit';
+  type: ButtonTypes;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(

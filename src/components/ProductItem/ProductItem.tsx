@@ -2,13 +2,14 @@ import classes from './productItem.module.css';
 import { useRef, useState } from 'react';
 import Button from '../Button/Button.tsx';
 
-interface ProductDataProps {
-  id?: number;
+export interface ProductDataProps {
+  id: number;
   name: string;
   unitPrice: number;
   imageUrl: string;
   ingredients: string[];
   soldOut: boolean;
+  qty: number;
 }
 
 const ProductItem = ({
@@ -19,6 +20,7 @@ const ProductItem = ({
   soldOut,
 }: ProductDataProps) => {
   const [count, setCount] = useState(1);
+  const [itemPrice, setItemPrice] = useState(unitPrice);
   const addToCardRef = useRef<HTMLButtonElement>(null);
   const counterRef = useRef<HTMLDivElement>(null);
   const hideBtn = (): void => {
@@ -30,6 +32,7 @@ const ProductItem = ({
   const decrementCount = (): void => {
     if (count > 1) {
       setCount(count - 1);
+      setItemPrice((prevItemPrice: number) => prevItemPrice - unitPrice);
     } else {
       if (counterRef.current && addToCardRef.current) {
         counterRef.current.style.display = 'none';
@@ -39,6 +42,7 @@ const ProductItem = ({
   };
   const incrementCount = (): void => {
     setCount(count + 1);
+    setItemPrice((unitPrice += itemPrice));
   };
   return (
     <div className={classes.pizzaItem}>
@@ -57,7 +61,7 @@ const ProductItem = ({
         {soldOut ? (
           <p className={classes.soldOut}>SOLD OUT</p>
         ) : (
-          <p className={classes.price}>€{unitPrice}</p>
+          <p className={classes.price}>€{itemPrice}</p>
         )}
       </div>
       {!soldOut && (
