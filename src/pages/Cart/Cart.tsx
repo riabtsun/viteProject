@@ -6,7 +6,7 @@ import cartItems from '../../cartData.ts';
 import { CartProps } from '../../types.ts';
 import { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { UserContextProvider } from '../../contexts/UserContext.tsx';
+import { UserContextProvider } from '../../contexts/UserContextProvider.ts';
 
 const Cart = () => {
   const [productItems, setProductItems] = useState([...cartItems]);

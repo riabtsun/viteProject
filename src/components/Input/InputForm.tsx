@@ -2,7 +2,7 @@ import { ChangeEvent, useState, useContext } from 'react';
 import Button from '../Button/Button.tsx';
 import btnClasses from '../Button/button.module.css';
 import { useNavigate } from 'react-router-dom';
-import { UserContextProvider } from '../../contexts/UserContext.tsx';
+import { UserContextProvider } from '../../contexts/UserContextProvider.ts';
 
 interface InputProps {
   type: string;
@@ -14,13 +14,13 @@ interface InputProps {
 }
 
 const InputForm = ({
-  type,
-  placeHolder,
-  ariaLabel,
-  className,
-  withBtn,
-  navigateTo,
-}: InputProps) => {
+                     type,
+                     placeHolder,
+                     ariaLabel,
+                     className,
+                     withBtn,
+                     navigateTo,
+                   }: InputProps) => {
   const [inputState, setInputState] = useState('');
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>): void => {

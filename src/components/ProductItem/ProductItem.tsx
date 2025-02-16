@@ -1,6 +1,7 @@
 import classes from './productItem.module.css';
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import Button from '../Button/Button.tsx';
+import { UserContextProvider } from '../../contexts/UserContextProvider.ts';
 
 export interface ProductDataProps {
   id: number;
@@ -13,16 +14,18 @@ export interface ProductDataProps {
 }
 
 const ProductItem = ({
-  name,
-  unitPrice,
-  imageUrl,
-  ingredients,
-  soldOut,
-}: ProductDataProps) => {
+                       id, name,
+                       unitPrice,
+                       imageUrl,
+                       ingredients,
+                       soldOut,
+                     }: ProductDataProps) => {
+
   const [count, setCount] = useState(1);
   const [itemPrice, setItemPrice] = useState(unitPrice);
   const addToCardRef = useRef<HTMLButtonElement>(null);
   const counterRef = useRef<HTMLDivElement>(null);
+  const data = useContext(UserContextProvider);
   const hideBtn = (): void => {
     if (addToCardRef.current && counterRef.current) {
       addToCardRef.current.style.display = 'none';
@@ -42,6 +45,7 @@ const ProductItem = ({
   };
   const incrementCount = (): void => {
     setCount(count + 1);
+    data?.addToCart({ id, name, unitPrice, imageUrl, ingredients, soldOut, qty: count });
     setItemPrice((unitPrice += itemPrice));
   };
   return (
@@ -55,7 +59,7 @@ const ProductItem = ({
               <span key={ingredient}>{ingredient}, </span>
             ) : (
               <span key={ingredient}>{ingredient} </span>
-            )
+            ),
           )}
         </p>
         {soldOut ? (
