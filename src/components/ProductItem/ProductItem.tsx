@@ -2,35 +2,31 @@ import classes from './productItem.module.css';
 import { useContext, useRef, useState } from 'react';
 import Button from '../Button/Button.tsx';
 import { UserContextProvider } from '../../contexts/UserContextProvider.ts';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/slices/cartSlice.ts';
+import { ProductData } from '../../pages/Menu/Menu.tsx';
 
-export interface ProductDataProps {
-  id: number;
-  name: string;
-  unitPrice: number;
-  imageUrl: string;
-  ingredients: string[];
-  soldOut: boolean;
-  qty: number;
-}
-
-const ProductItem = ({
-                       id, name,
-                       unitPrice,
-                       imageUrl,
-                       ingredients,
-                       soldOut,
-                     }: ProductDataProps) => {
-
+const ProductItem = (props: ProductData) => {
+  const {
+    id,
+    name,
+    unitPrice,
+    imageUrl,
+    ingredients,
+    soldOut,
+    qty = 0,
+  } = props;
   const [count, setCount] = useState(1);
-  const [itemPrice, setItemPrice] = useState(unitPrice);
+  const [itemPrice, setItemPrice] = useState<number>(unitPrice);
   const addToCardRef = useRef<HTMLButtonElement>(null);
   const counterRef = useRef<HTMLDivElement>(null);
   const data = useContext(UserContextProvider);
-  const hideBtn = (): void => {
+  const hideBtn = (item: ProductData): void => {
     if (addToCardRef.current && counterRef.current) {
       addToCardRef.current.style.display = 'none';
       counterRef.current.style.display = 'flex';
     }
+    dispatch(addToCart(item));
   };
   const decrementCount = (): void => {
     if (count > 1) {
@@ -45,8 +41,21 @@ const ProductItem = ({
   };
   const incrementCount = (): void => {
     setCount(count + 1);
-    data?.addToCart({ id, name, unitPrice, imageUrl, ingredients, soldOut, qty: count });
-    setItemPrice((unitPrice += itemPrice));
+    data?.addToCart({
+      id,
+      name,
+      unitPrice,
+      imageUrl,
+      ingredients,
+      soldOut,
+      qty: count,
+    });
+    setItemPrice((prevItemPrice: number) => prevItemPrice + unitPrice);
+  };
+
+  const dispatch = useDispatch();
+  const handleAddToCart = (item: ProductData) => {
+    dispatch(addToCart(item));
   };
   return (
     <div className={classes.pizzaItem}>
@@ -59,7 +68,7 @@ const ProductItem = ({
               <span key={ingredient}>{ingredient}, </span>
             ) : (
               <span key={ingredient}>{ingredient} </span>
-            ),
+            )
           )}
         </p>
         {soldOut ? (
@@ -72,7 +81,7 @@ const ProductItem = ({
         <div className='cart-controls'>
           <Button
             ref={addToCardRef}
-            onClick={hideBtn}
+            onClick={() => hideBtn(props)}
             className={classes.addToCart}
             text='ADD TO CART'
             type='button'
@@ -88,7 +97,7 @@ const ProductItem = ({
 
             <span>{count}</span>
             <Button
-              onClick={incrementCount}
+              onClick={() => handleAddToCart(props)}
               className={classes.counterButton}
               aria-label='Increase quantity'
               text='+'

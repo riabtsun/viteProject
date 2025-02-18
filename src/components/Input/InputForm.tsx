@@ -1,8 +1,10 @@
-import { ChangeEvent, useState, useContext } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Button from '../Button/Button.tsx';
 import btnClasses from '../Button/button.module.css';
 import { useNavigate } from 'react-router-dom';
-import { UserContextProvider } from '../../contexts/UserContextProvider.ts';
+// import { UserContextProvider } from '../../contexts/UserContextProvider.ts';
+import { useDispatch } from 'react-redux';
+import { userName } from '../../redux/slices/userSlice.ts';
 
 interface InputProps {
   type: string;
@@ -14,14 +16,14 @@ interface InputProps {
 }
 
 const InputForm = ({
-                     type,
-                     placeHolder,
-                     ariaLabel,
-                     className,
-                     withBtn,
-                     navigateTo,
-                   }: InputProps) => {
-  const [inputState, setInputState] = useState('');
+  type,
+  placeHolder,
+  ariaLabel,
+  className,
+  withBtn,
+  navigateTo,
+}: InputProps) => {
+  const [inputState, setInputState] = useState<string>('');
 
   const handleInput = (e: ChangeEvent<HTMLInputElement>): void => {
     setInputState(e.target.value);
@@ -30,15 +32,18 @@ const InputForm = ({
 
   const navigate = useNavigate();
 
-  const data = useContext(UserContextProvider);
+  // const data = useContext(UserContextProvider);
 
-  const handleChangeName = (): void => {
-    data?.setName(inputState);
+  const dispatch = useDispatch();
+  const handleChangeName = (e: FormEvent<HTMLFormElement>): void => {
+    e.preventDefault();
+    // data?.setName(inputState);
     navigate(navigateTo ?? '/');
+    dispatch(userName(inputState));
   };
 
   return (
-    <form>
+    <form onSubmit={handleChangeName}>
       <input
         className={className}
         type={type}
@@ -52,7 +57,6 @@ const InputForm = ({
           type='submit'
           text='Start Order'
           className={btnClasses.orderBtn}
-          onClick={handleChangeName}
         />
       )}
     </form>

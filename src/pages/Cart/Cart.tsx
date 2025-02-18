@@ -4,23 +4,25 @@ import CartItem from '../../components/CartItem/CartItem.tsx';
 import Button from '../../components/Button/Button.tsx';
 import cartItems from '../../cartData.ts';
 import { CartProps } from '../../types.ts';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { UserContextProvider } from '../../contexts/UserContextProvider.ts';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../redux/store.ts';
+// import { UserContextProvider } from '../../contexts/UserContextProvider.ts';
 
 const Cart = () => {
   const [productItems, setProductItems] = useState([...cartItems]);
   const clearCart = () => {
     setProductItems([]);
   };
-
-  const data = useContext(UserContextProvider);
+  const userNameValue = useSelector((state: RootState) => state.user.userName);
+  // const data = useContext(UserContextProvider);
   return (
     <div className='container'>
       <Link to='/menu' className={classes.backLink}>
         ← Back to menu
       </Link>
-      <h1 className={classes.cartTitle}>Your cart, {data?.name}</h1>
+      <h1 className={classes.cartTitle}>Your cart, {userNameValue}</h1>
 
       <div className='cart-items'>
         {productItems.length ? (
