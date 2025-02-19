@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductDataQty } from '../../types/productData.ts';
-import { productPrice } from '../../utils.ts';
+import { productPrice, totalPrice } from '../../utils.ts';
 
 export const getAllData = createAsyncThunk('pizzasList', async () => {
   const response = await fetch(
@@ -9,7 +9,7 @@ export const getAllData = createAsyncThunk('pizzasList', async () => {
   return await response.json();
 });
 
-interface CartState {
+export interface CartState {
   items: ProductDataQty[];
   totalPrice: number;
   totalCount: number;
@@ -32,9 +32,11 @@ export const cartSlice = createSlice({
 
       if (!existItem?.id) {
         state.items.push({ ...action.payload, qty: 1 });
+        totalPrice(state);
       } else {
         existItem.qty += 1;
         productPrice(existItem);
+        totalPrice(state);
       }
     },
     decrementFromCart: (state, action: PayloadAction<ProductDataQty['id']>) => {
@@ -42,13 +44,16 @@ export const cartSlice = createSlice({
       if (existItem) {
         existItem.qty -= 1;
         productPrice(existItem);
+        totalPrice(state);
       }
     },
     deleteFromCart: (state, action: PayloadAction<ProductDataQty['id']>) => {
       state.items = state.items.filter((item) => item.id !== action.payload);
+      totalPrice(state);
     },
     clearCart: (state) => {
       state.items = [];
+      totalPrice(state);
     },
   },
   // extraReducers: {

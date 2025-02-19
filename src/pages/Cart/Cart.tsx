@@ -16,7 +16,7 @@ const Cart = () => {
   };
   const userNameValue = useSelector((state: RootState) => state.user.userName);
   const cartData = useSelector((state: RootState) => state.cart.items);
-
+  const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
   return (
     <div className='container'>
       <Link to='/menu' className={classes.backLink}>
@@ -41,6 +41,7 @@ const Cart = () => {
           <p>Cart is empty</p>
         )}
       </div>
+      <h2>Total price: {totalPrice}$</h2>
       <div className={classes.cartActions}>
         <Button
           type='button'

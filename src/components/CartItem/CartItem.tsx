@@ -11,7 +11,7 @@ import {
   deleteFromCart,
 } from '../../redux/slices/cartSlice.ts';
 
-const CartItem = ({ name, id, price, quantity }: CartProps) => {
+const CartItem = ({ name, id }: CartProps) => {
   const productItem = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const cartList: ProductDataQty[] = useSelector(
@@ -26,6 +26,8 @@ const CartItem = ({ name, id, price, quantity }: CartProps) => {
   const removeItem = (item: ProductDataQty) => {
     if (item?.qty >= 1) {
       dispatch(decrementFromCart(item.id));
+    } else {
+      dispatch(deleteFromCart(item.id));
     }
   };
 
