@@ -1,11 +1,10 @@
 import { UserShopState } from '../contexts/UserContext.tsx';
-import { ProductDataProps } from '../components/ProductItem/ProductItem.tsx';
+import { ProductData } from '../types/productData.ts';
 
 export interface ActionState {
   type: string;
-  payload?: ProductDataProps;
+  payload?: ProductData;
 }
-
 
 const shopReducer = (state: UserShopState, action: ActionState) => {
   const { type, payload } = action;

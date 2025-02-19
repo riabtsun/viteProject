@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ProductData } from '../../pages/Menu/Menu';
+import { ProductDataQty } from '../../types/productData.ts';
+import { productPrice } from '../../utils.ts';
 
 export const getAllData = createAsyncThunk('pizzasList', async () => {
   const response = await fetch(
@@ -9,7 +10,7 @@ export const getAllData = createAsyncThunk('pizzasList', async () => {
 });
 
 interface CartState {
-  items: ProductData[];
+  items: ProductDataQty[];
   totalPrice: number;
   totalCount: number;
 }
@@ -24,16 +25,30 @@ export const cartSlice = createSlice({
   name: 'products',
   initialState: initialState,
   reducers: {
-    addToCart: (state, action: PayloadAction<ProductData>) => {
+    addToCart: (state, action: PayloadAction<ProductDataQty>) => {
       const existItem = state.items.find(
         (item) => item.id === action.payload.id
       );
 
       if (!existItem?.id) {
-        state.items.push(action.payload);
+        state.items.push({ ...action.payload, qty: 1 });
       } else {
         existItem.qty += 1;
+        productPrice(existItem);
       }
+    },
+    decrementFromCart: (state, action: PayloadAction<ProductDataQty['id']>) => {
+      const existItem = state.items.find((item) => item.id === action.payload);
+      if (existItem) {
+        existItem.qty -= 1;
+        productPrice(existItem);
+      }
+    },
+    deleteFromCart: (state, action: PayloadAction<ProductDataQty['id']>) => {
+      state.items = state.items.filter((item) => item.id !== action.payload);
+    },
+    clearCart: (state) => {
+      state.items = [];
     },
   },
   // extraReducers: {
@@ -50,5 +65,6 @@ export const cartSlice = createSlice({
   //   },
   // },
 });
-export const { addToCart } = cartSlice.actions;
+export const { addToCart, decrementFromCart, deleteFromCart, clearCart } =
+  cartSlice.actions;
 export default cartSlice.reducer;

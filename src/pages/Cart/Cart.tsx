@@ -2,21 +2,21 @@ import classes from './cart.module.css';
 import '../../App.css';
 import CartItem from '../../components/CartItem/CartItem.tsx';
 import Button from '../../components/Button/Button.tsx';
-import cartItems from '../../cartData.ts';
-import { CartProps } from '../../types.ts';
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store.ts';
-// import { UserContextProvider } from '../../contexts/UserContextProvider.ts';
+import { ProductDataQty } from '../../types/productData.ts';
+import { useDispatch } from 'react-redux';
+import { clearCart } from '../../redux/slices/cartSlice.ts';
 
 const Cart = () => {
-  const [productItems, setProductItems] = useState([...cartItems]);
-  const clearCart = () => {
-    setProductItems([]);
+  const dispatch = useDispatch();
+  const clearCartData = () => {
+    dispatch(clearCart());
   };
   const userNameValue = useSelector((state: RootState) => state.user.userName);
-  // const data = useContext(UserContextProvider);
+  const cartData = useSelector((state: RootState) => state.cart.items);
+
   return (
     <div className='container'>
       <Link to='/menu' className={classes.backLink}>
@@ -25,14 +25,15 @@ const Cart = () => {
       <h1 className={classes.cartTitle}>Your cart, {userNameValue}</h1>
 
       <div className='cart-items'>
-        {productItems.length ? (
-          productItems.map((product: CartProps) => {
+        {cartData.length ? (
+          cartData.map((product: ProductDataQty) => {
             return (
               <CartItem
                 key={product.id}
                 name={product.name}
-                price={product.price}
-                quantity={product.quantity}
+                price={product.unitPrice}
+                quantity={product.qty}
+                id={product.id}
               />
             );
           })
@@ -48,7 +49,7 @@ const Cart = () => {
         />
         <Button
           type='button'
-          onClick={clearCart}
+          onClick={clearCartData}
           className={classes.clearBtn}
           text='Clear cart'
         />

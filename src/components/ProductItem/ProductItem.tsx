@@ -1,61 +1,37 @@
 import classes from './productItem.module.css';
-import { useContext, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Button from '../Button/Button.tsx';
-import { UserContextProvider } from '../../contexts/UserContextProvider.ts';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../redux/slices/cartSlice.ts';
-import { ProductData } from '../../pages/Menu/Menu.tsx';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addToCart,
+  decrementFromCart,
+  deleteFromCart,
+} from '../../redux/slices/cartSlice.ts';
+import { ProductData, ProductDataQty } from '../../types/productData.ts';
+import { RootState } from '../../redux/store.ts';
 
 const ProductItem = (props: ProductData) => {
-  const {
-    id,
-    name,
-    unitPrice,
-    imageUrl,
-    ingredients,
-    soldOut,
-    qty = 0,
-  } = props;
-  const [count, setCount] = useState(1);
-  const [itemPrice, setItemPrice] = useState<number>(unitPrice);
+  const { id, name, unitPrice, imageUrl, ingredients, soldOut } = props;
+  const cartList: ProductDataQty[] = useSelector(
+    (state: RootState) => state.cart.items
+  );
+  const currentItem = cartList.find((item) => item?.id === id);
+  const totalProductPrice = currentItem?.totalPrice;
   const addToCardRef = useRef<HTMLButtonElement>(null);
   const counterRef = useRef<HTMLDivElement>(null);
-  const data = useContext(UserContextProvider);
-  const hideBtn = (item: ProductData): void => {
-    if (addToCardRef.current && counterRef.current) {
-      addToCardRef.current.style.display = 'none';
-      counterRef.current.style.display = 'flex';
-    }
-    dispatch(addToCart(item));
-  };
-  const decrementCount = (): void => {
-    if (count > 1) {
-      setCount(count - 1);
-      setItemPrice((prevItemPrice: number) => prevItemPrice - unitPrice);
-    } else {
-      if (counterRef.current && addToCardRef.current) {
-        counterRef.current.style.display = 'none';
-        addToCardRef.current.style.display = 'block';
-      }
-    }
-  };
-  const incrementCount = (): void => {
-    setCount(count + 1);
-    data?.addToCart({
-      id,
-      name,
-      unitPrice,
-      imageUrl,
-      ingredients,
-      soldOut,
-      qty: count,
-    });
-    setItemPrice((prevItemPrice: number) => prevItemPrice + unitPrice);
-  };
 
   const dispatch = useDispatch();
-  const handleAddToCart = (item: ProductData) => {
+  const hideBtn = (item: ProductDataQty): void => {
     dispatch(addToCart(item));
+  };
+
+  const handleAddToCart = (item: ProductDataQty) => {
+    dispatch(addToCart(item));
+  };
+  const handleRemoveFromCart = (item: ProductDataQty) => {
+    if (item) {
+      dispatch(decrementFromCart(item.id));
+    }
   };
   return (
     <div className={classes.pizzaItem}>
@@ -74,37 +50,39 @@ const ProductItem = (props: ProductData) => {
         {soldOut ? (
           <p className={classes.soldOut}>SOLD OUT</p>
         ) : (
-          <p className={classes.price}>€{itemPrice}</p>
+          <p className={classes.price}>€{totalProductPrice ?? unitPrice}</p>
         )}
       </div>
-      {!soldOut && (
-        <div className='cart-controls'>
+      {currentItem ? (
+        <div ref={counterRef} className={classes.counter}>
           <Button
-            ref={addToCardRef}
-            onClick={() => hideBtn(props)}
-            className={classes.addToCart}
-            text='ADD TO CART'
+            onClick={() => currentItem && handleRemoveFromCart(currentItem)}
+            className={classes.counterButton}
+            aria-label='Decrease quantity'
+            text='-'
             type='button'
           />
-          <div ref={counterRef} className={classes.counter}>
+          <span>{currentItem?.qty}</span>
+          <Button
+            onClick={() => currentItem && handleAddToCart(currentItem)}
+            className={classes.counterButton}
+            aria-label='Increase quantity'
+            text='+'
+            type='button'
+          />
+        </div>
+      ) : (
+        !soldOut && (
+          <div className='cart-controls'>
             <Button
-              onClick={decrementCount}
-              className={classes.counterButton}
-              aria-label='Decrease quantity'
-              text='-'
-              type='button'
-            />
-
-            <span>{count}</span>
-            <Button
-              onClick={() => handleAddToCart(props)}
-              className={classes.counterButton}
-              aria-label='Increase quantity'
-              text='+'
+              ref={addToCardRef}
+              onClick={() => hideBtn(props)}
+              className={classes.addToCart}
+              text='ADD TO CART'
               type='button'
             />
           </div>
-        </div>
+        )
       )}
     </div>
   );

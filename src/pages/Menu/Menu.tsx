@@ -2,16 +2,7 @@ import '../../App.css';
 import ProductItem from '../../components/ProductItem/ProductItem.tsx';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-
-export interface ProductData {
-  id: number;
-  name: string;
-  unitPrice: number;
-  imageUrl: string;
-  ingredients: string[];
-  soldOut: boolean;
-  qty: number;
-}
+import { ProductData } from '../../types/productData.ts';
 
 const Menu = () => {
   const [data, setData] = useState<ProductData[]>([]);
