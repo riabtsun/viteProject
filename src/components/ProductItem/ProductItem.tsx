@@ -29,8 +29,10 @@ const ProductItem = (props: ProductData) => {
     dispatch(addToCart(item));
   };
   const handleRemoveFromCart = (item: ProductDataQty) => {
-    if (item) {
+    if (item.qty > 1) {
       dispatch(decrementFromCart(item.id));
+    } else {
+      dispatch(deleteFromCart(item.id));
     }
   };
   return (
