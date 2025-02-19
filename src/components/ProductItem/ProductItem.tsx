@@ -1,5 +1,5 @@
 import classes from './productItem.module.css';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import Button from '../Button/Button.tsx';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -78,7 +78,9 @@ const ProductItem = (props: ProductData) => {
           <div className='cart-controls'>
             <Button
               ref={addToCardRef}
-              onClick={() => hideBtn(props)}
+              onClick={() =>
+                hideBtn({ ...props, qty: 1, totalPrice: unitPrice })
+              }
               className={classes.addToCart}
               text='ADD TO CART'
               type='button'
