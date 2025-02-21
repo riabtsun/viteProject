@@ -1,45 +1,37 @@
+// import { useEffect } from 'react';
+// import { useDispatch, useSelector } from 'react-redux';
 import '../../App.css';
+import useFetch from '../../hooks/useFetch.ts';
+// import { getAllData } from '../../redux/slices/cartSlice.ts';
+// import { AppDispatch, RootState } from '../../redux/store.ts';
 import ProductItem from '../../components/ProductItem/ProductItem.tsx';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { ProductData } from '../../types/productData.ts';
 
 const Menu = () => {
-  const [data, setData] = useState<ProductData[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  // const { menuItems, isLoading, error } = useSelector(
+  //   (state: RootState) => state.cart
+  // );
+  // const dispatch = useDispatch<AppDispatch>();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          'https://react-fast-pizza-api.onrender.com/api/menu'
-        );
-        if (!response) {
-          throw new Error('Network response was not ok');
-        }
-        setData(response.data.data);
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
-  }, []);
+  const { data, isLoading, isError } = useFetch<ProductData[]>(
+    'https://react-fast-pizza-api.onrender.com/api/menu'
+  );
 
-  if (loading) {
-    return <h1>Завантаження даних...</h1>;
-  }
+  console.log(data);
+  // useEffect(() => {
+  //   dispatch(getAllData());
+  // }, [dispatch]);
 
   return (
     <div className='container'>
-      {data.length ? (
-        data.map((pizza: ProductData) => (
-          <ProductItem key={pizza.id} {...pizza} />
-        ))
-      ) : (
-        <p>All pizzas was eaten 😥</p>
+      {isLoading && (
+        <img src='/pizza_loader.gif' alt='pizza' width='150' height='150' />
       )}
+      {isError && <p>Fetch failed</p>}
+      {data &&
+        data.data.map((pizza: ProductData) => (
+          <ProductItem key={pizza.id} {...pizza} />
+        ))}
     </div>
   );
 };

@@ -1,15 +1,15 @@
-import classes from './cartItem.module.css';
-import { CartProps } from '../../types.ts';
 import { useRef } from 'react';
-import Button from '../Button/Button.tsx';
-import { ProductDataQty } from '../../types/productData.ts';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../redux/store.ts';
 import {
   addToCart,
   decrementFromCart,
   deleteFromCart,
 } from '../../redux/slices/cartSlice.ts';
+import { RootState } from '../../redux/store.ts';
+import { CartProps } from '../../types.ts';
+import { ProductDataQty } from '../../types/productData.ts';
+import Button from '../Button/Button.tsx';
+import classes from './cartItem.module.css';
 
 const CartItem = ({ name, id }: CartProps) => {
   const productItem = useRef<HTMLDivElement>(null);
