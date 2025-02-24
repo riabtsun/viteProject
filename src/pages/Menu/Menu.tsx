@@ -19,7 +19,7 @@ const Menu = () => {
   // const dispatch = useDispatch<AppDispatch> ();
 
   const { data, isLoading, isError } = useFetch<IProduct>(
-    'https://react-fast-pizza-api.onrender.com/api/menu'
+    'https://react-fast-pizza-api.onrender.com/api/menu',
   );
 
   // useEffect(() => {
