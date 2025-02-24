@@ -8,10 +8,11 @@ const useFetch = <T>(url: string) => {
   useEffect(() => {
     const controller = new AbortController();
     const signal = controller.signal;
+
     const getData = async () => {
       try {
-        setIsError(false);
         setIsLoading(true);
+        setIsError(false);
 
         const res = await fetch(url, { signal });
 
@@ -20,31 +21,15 @@ const useFetch = <T>(url: string) => {
         }
 
         const data = await res.json();
-
+        console.log('data is: ', data);
         setData(data);
       } catch {
         setIsError(true);
       } finally {
         setIsLoading(false);
-  const getData = async () => {
-    try {
-      setIsLoading(true);
-      setIsError(false);
-      console.log(isLoading, isError);
-      const res = await fetch(url, { signal });
       }
     };
-      const data = await res.json();
-      setData(data);
-    } catch {
-      setIsError(true);
-    } finally {
-      setIsLoading(false);
-      setIsError(false);
-    }
-  };
 
-  useEffect(() => {
     getData();
 
     return () => {
