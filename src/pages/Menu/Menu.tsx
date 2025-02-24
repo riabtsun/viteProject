@@ -16,13 +16,12 @@ const Menu = () => {
   // const { menuItems, isLoading, error } = useSelector(
   //   (state: RootState) => state.cart
   // );
-  // const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch> ();
 
   const { data, isLoading, isError } = useFetch<IProduct>(
     'https://react-fast-pizza-api.onrender.com/api/menu'
   );
 
-  console.log(data);
   // useEffect(() => {
   //   dispatch(getAllData());
   // }, [dispatch]);

@@ -12,7 +12,7 @@ const useFetch = <T>(url: string) => {
     try {
       setIsLoading(true);
       setIsError(false);
-
+      console.log(isLoading, isError);
       const res = await fetch(url, { signal });
 
       if (!res.ok) {
@@ -20,12 +20,12 @@ const useFetch = <T>(url: string) => {
       }
 
       const data = await res.json();
-      console.log('data is: ', data);
       setData(data);
     } catch {
       setIsError(true);
     } finally {
       setIsLoading(false);
+      setIsError(false);
     }
   };
 
@@ -35,7 +35,7 @@ const useFetch = <T>(url: string) => {
     return () => {
       controller.abort();
     };
-  }, []);
+  }, [url]);
 
   return { data, isLoading, isError };
 };
