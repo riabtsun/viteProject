@@ -29,11 +29,10 @@ const useFetch = <T>(url: string) => {
         setIsLoading(false);
       }
     };
-
     getData();
 
     return () => {
-      controller.abort();
+      controller.abort('Abort controller was called');
     };
   }, [url]);
 
