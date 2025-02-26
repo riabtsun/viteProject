@@ -13,8 +13,10 @@ const Menu = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    dispatch(getAllData());
-  }, [dispatch]);
+    if (!menuItems.length) {
+      dispatch(getAllData());
+    }
+  }, [dispatch, menuItems.length]);
 
   return (
     <div className='container'>

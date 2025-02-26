@@ -1,6 +1,6 @@
-import classes from './header.module.css';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import SearchInput from '../../SearchInput/SearchInput.tsx';
+import classes from './header.module.css';
 
 const Header = () => {
   const location = useLocation();
@@ -36,6 +36,17 @@ const Header = () => {
                 className={`${classes.navLink} ${isActive && classes.active}`}
               >
                 Cart
+              </span>
+            )}
+          </NavLink>
+        </li>
+        <li>
+          <NavLink className={classes.navLink} to={'/form'}>
+            {({ isActive }) => (
+              <span
+                className={`${classes.navLink} ${isActive && classes.active}`}
+              >
+                Form
               </span>
             )}
           </NavLink>
