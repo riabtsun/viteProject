@@ -29,13 +29,14 @@ const Form = () => {
     mode: 'onBlur',
     resolver: zodResolver(schema),
   });
+
   const handleSubmitForm: SubmitHandler<FormState> = (data) => {
     console.log(data);
   };
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(handleSubmitForm)}>
-      <label htmlFor=''>
+      <label>
         Your name
         <input type='text' {...register('username')} />
         {errors.username && <p>{errors.username.message}</p>}

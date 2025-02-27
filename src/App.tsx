@@ -17,8 +17,8 @@ function App() {
           <Route path='/' element={<MainPaige />} />
           <Route path='/menu' element={<Menu />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='*' element={<PageNotFound />} />
           <Route path='/form' element={<Form />} />
+          <Route path='*' element={<PageNotFound />} />
         </Routes>
       </main>
     </div>

@@ -1,10 +1,9 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { userName } from '../../redux/slices/userSlice.ts';
 import Button from '../Button/Button.tsx';
 import btnClasses from '../Button/button.module.css';
-import { useNavigate } from 'react-router-dom';
-// import { UserContextProvider } from '../../contexts/UserContextProvider.ts';
-import { useDispatch } from 'react-redux';
-import { userName } from '../../redux/slices/userSlice.ts';
 
 interface InputProps {
   type: string;
@@ -32,12 +31,9 @@ const InputForm = ({
 
   const navigate = useNavigate();
 
-  // const data = useContext(UserContextProvider);
-
   const dispatch = useDispatch();
   const handleChangeName = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    // data?.setName(inputState);
     navigate(navigateTo ?? '/');
     dispatch(userName(inputState));
   };
