@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ProductDataQty } from '../../types/productData.ts';
 
-interface ICartData {
+export interface ICartData {
   cartData: ProductDataQty[];
   totalPrice: number;
   priority: boolean;

@@ -89,6 +89,7 @@ const Form = () => {
               required={true}
               {...register('address')}
             />
+            {errors.address && <p>{errors.address.message}</p>}
           </div>
         </div>
         <div className={styles.checkboxGroup}>

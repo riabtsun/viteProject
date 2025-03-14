@@ -1,7 +1,10 @@
+import { Link } from 'react-router-dom';
+import { ICartData } from '../../redux/slices/ordersSlice.ts';
 import styles from './order.module.css';
 
-const Order = () => {
+const Order = ({ cartData, priority, totalPrice }: ICartData) => {
   // const { id } = useParams();
+  console.log(cartData, 'data', priority);
 
   return (
     <div className={styles.container}>
@@ -48,6 +51,8 @@ const Order = () => {
           <span className={styles.priceValue}>€14.00</span>
         </div>
       </div>
+
+      <Link to={'/orders'}>Show all orders</Link>
     </div>
   );
 };
