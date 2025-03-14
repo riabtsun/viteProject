@@ -51,7 +51,7 @@ const InputForm = ({
       {withBtn && (
         <Button
           type='submit'
-          text='Start Order'
+          text='Start Orders'
           className={btnClasses.orderBtn}
         />
       )}

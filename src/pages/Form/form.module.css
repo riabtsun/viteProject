@@ -1,11 +1,71 @@
-.form {
-    display: flex;
-    flex-direction: column;
-    row-gap: 30px;
+body {
+    background-color: #f8f9fa;
 }
 
+.form {
+    display: block;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
 .form label {
     display: flex;
     justify-content: space-between;
     column-gap: 20px;
+}
+
+label {
+    display: block;
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 0.5rem;
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+input[type="text"],
+input[type="tel"] {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+}
+
+.checkboxGroup {
+    margin: 2rem 0;
+}
+
+.checkboxWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #666;
+    border-radius: 4px;
+}
+
+.orderBtn {
+    background: #FDB913;
+    color: black;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 999px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.3s;
+}
+
+.orderBtn:hover {
+    background: #e5a700;
 }

@@ -11,3 +11,12 @@ export interface ProductDataQty extends ProductData {
   qty: number;
   totalPrice: number;
 }
+
+export interface OrderData {
+  id: number;
+  name: string;
+  unitPrice: number;
+  ingredients: string[];
+  qty: number;
+  totalPrice: number;
+}

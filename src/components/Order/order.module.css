@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.orderTitle {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.badges {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-weight: bold;
+    color: white;
+}
+
+.badgePriority {
+    background-color: #dc3545;
+}
+
+.badgePreparing {
+    background-color: #28a745;
+}
+
+.timeBanner {
+    background-color: #f0f0f0;
+    padding: 1rem;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.timeLeft {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.estimatedTime {
+    color: #666;
+}
+
+.orderDetails {
+    margin-bottom: 2rem;
+}
+
+.pizzaItem {
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.pizzaHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.pizzaName {
+    font-size: 1.2rem;
+}
+
+.pizzaPrice {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.ingredients {
+    color: #666;
+    font-style: italic;
+}
+
+.priceBreakdown {
+    background-color: #f0f0f0;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+.priceItem {
+    margin-bottom: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.priceLabel {
+    color: #444;
+}
+
+.priceValue {
+    font-weight: bold;
+}

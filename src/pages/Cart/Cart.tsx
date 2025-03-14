@@ -1,22 +1,26 @@
-import classes from './cart.module.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../App.css';
-import CartItem from '../../components/CartItem/CartItem.tsx';
 import Button from '../../components/Button/Button.tsx';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import CartItem from '../../components/CartItem/CartItem.tsx';
+import { clearCart } from '../../redux/slices/cartSlice.ts';
 import { RootState } from '../../redux/store.ts';
 import { ProductDataQty } from '../../types/productData.ts';
-import { useDispatch } from 'react-redux';
-import { clearCart } from '../../redux/slices/cartSlice.ts';
+import classes from './cart.module.css';
 
 const Cart = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const clearCartData = () => {
     dispatch(clearCart());
   };
   const userNameValue = useSelector((state: RootState) => state.user.userName);
   const cartData = useSelector((state: RootState) => state.cart.items);
   const totalPrice = useSelector((state: RootState) => state.cart.totalPrice);
+  const handleAddOrder = () => {
+    navigate('/form');
+  };
+
   return (
     <div className='container'>
       <Link to='/menu' className={classes.backLink}>
@@ -46,7 +50,8 @@ const Cart = () => {
         <Button
           type='button'
           className={classes.orderBtn}
-          text='Order pizzas'
+          onClick={handleAddOrder}
+          text='Orders pizzas'
         />
         <Button
           type='button'
