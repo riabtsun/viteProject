@@ -48,7 +48,7 @@ const Order = ({ cartData, priority, totalPrice }: ICartData) => {
         </div>
         <div className={styles.priceItem}>
           <span className={styles.priceLabel}>To pay on delivery:</span>
-          <span className={styles.priceValue}>€14.00</span>
+          <span className={styles.priceValue}>€{totalPrice}</span>
         </div>
       </div>
 

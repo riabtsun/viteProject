@@ -21,6 +21,7 @@ const Orders = () => {
             cartData={cartData}
             priority={priority}
             totalPrice={totalPrice}
+            key={idx}
           />
         );
       })}

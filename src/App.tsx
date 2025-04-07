@@ -22,7 +22,10 @@ function App() {
           <Route path='/form' element={<Form />} />
           <Route path='*' element={<PageNotFound />} />
           <Route path={'/orders'} element={<Orders />} />
-          <Route path={'/orders/:id'} element={<Order />} />
+          <Route
+            path={'/orders/:id'}
+            element={<Order cartData={[]} totalPrice={0} priority={false} />}
+          />
         </Routes>
       </main>
     </div>
