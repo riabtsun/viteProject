@@ -4,9 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "npx nodemon",
+    "dev": "npx nodemon -r dotenv/config",
     "build": "rimraf ./build && npx tsc",
-    "start": "npm run build && node build/main",
+    "start": "npm run build && node build/main cross-env NODE_ENV=production",
     "lint": "npx eslint ./src",
     "format": "npx eslint ./src --fix"
   },
